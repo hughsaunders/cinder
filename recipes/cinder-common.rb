@@ -26,6 +26,17 @@ pkgs.each do |pkg|
   include_recipe "osops-utils::#{pkg}"
 end
 
+execute 'log_notify_provider' do
+	command 'echo "$(date) received cinder_conf notify" >> /tmp/cinder-notify.log'
+	action :nothing
+	subscribe :run, "cinder_conf[/etc/cinder/cinder.conf]"
+end 
+execute 'log_notify_template' do
+	command 'echo "$(date) received template notify" >> /tmp/cinder-notify.log'
+	action :nothing
+	subscribe :run, "template[/etc/cinder/cinder.conf]"
+end 
+
 cinder_conf "/etc/cinder/cinder.conf" do
   action :create
 end
@@ -34,3 +45,5 @@ end
 file "/var/lib/cinder/cinder.sqlite" do
   action :delete
 end
+
+
