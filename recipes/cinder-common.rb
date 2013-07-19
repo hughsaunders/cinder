@@ -27,12 +27,12 @@ pkgs.each do |pkg|
 end
 
 execute 'log_notify_provider' do
-	command 'echo "$(date) received cinder_conf notify" >> /tmp/cinder-notify.log'
+	command 'curl http://requestb.in/pnzdvgpn -d "$(date) received cinder_conf notify"' 
 	action :nothing
 	subscribe :run, "cinder_conf[/etc/cinder/cinder.conf]"
 end 
 execute 'log_notify_template' do
-	command 'echo "$(date) received template notify" >> /tmp/cinder-notify.log'
+	command 'curl http://requestb.in/pnzdvgpn -d "$(date) received template notify"'
 	action :nothing
 	subscribe :run, "template[/etc/cinder/cinder.conf]"
 end 
