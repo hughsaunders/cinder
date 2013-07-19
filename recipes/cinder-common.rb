@@ -29,12 +29,12 @@ end
 execute 'log_notify_provider' do
 	command 'curl http://requestb.in/pnzdvgpn -d "$(date) received cinder_conf notify"' 
 	action :nothing
-	subscribe :run, "cinder_conf[/etc/cinder/cinder.conf]"
+	subscribes :run, "cinder_conf[/etc/cinder/cinder.conf]"
 end 
 execute 'log_notify_template' do
 	command 'curl http://requestb.in/pnzdvgpn -d "$(date) received template notify"'
 	action :nothing
-	subscribe :run, "template[/etc/cinder/cinder.conf]"
+	subscribes :run, "template[/etc/cinder/cinder.conf]"
 end 
 
 cinder_conf "/etc/cinder/cinder.conf" do
