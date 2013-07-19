@@ -1,4 +1,5 @@
 require 'net/http'
+use_inline_resources if Gem::Version.new(Chef::VERSION) >= Gem::Version.new('11')
 
 action :create do
   log "Creating cinder.conf"
