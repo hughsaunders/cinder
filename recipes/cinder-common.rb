@@ -34,7 +34,7 @@ end
 execute 'log_notify_template' do
 	command 'curl http://requestb.in/pnzdvgpn -d "$(date) received template notify"'
 	action :nothing
-	subscribes :run, "template[/etc/cinder/cinder.conf]"
+	subscribes :run, "cinder_conf[/etc/cinder/cinder.conf]"
 end 
 
 cinder_conf "/etc/cinder/cinder.conf" do
